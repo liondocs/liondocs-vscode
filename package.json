@@ -1,0 +1,144 @@
+{
+    "name": "LionDocs",
+    "displayName": "LionDocs for VS Code",
+    "description": "LionDocs plugin for VS Code",
+    "homepage": "https://github.com/liondocs/liondocs-vscode/blob/main/README.md",
+    "version": "1.0.0-alpha",
+    "publisher": "liondocs",
+    "author": "LionDocs Team",
+    "license": "MIT",
+    "icon": "LionDocs_icon.png",
+    "engines": {
+      "vscode": "^1.51.1"
+    },
+    "categories": [
+      "Other"
+    ],
+    "keywords": [
+      "editor",
+      "localization",
+      "mdn"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/liondocs/liondocs-vscode.git"
+    },
+    "bugs": {
+      "url": "https://github.com/liondocs/liondocs-vscode/issues"
+    },
+    "galleryBanner": {
+      "color": "#0E0A12",
+      "theme": "dark"
+    },
+    "activationEvents": [
+        "onCommand:liondocs.transfersame",
+		"onCommand:liondocs.transfersha",
+		"onCommand:liondocs.getshainsert",
+		"onCommand:liondocs.getshatoclip"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "configuration": {
+            "title": "LionDocs",
+            "properties": {
+                "liondocs.pathToContent": {
+                    "type": "string",
+                    "default": "default",
+                    "description": "Absolute path to content repository."
+                },
+                "liondocs.pathToTranslatedContent": {
+                    "type": "string",
+                    "default": "default",
+                    "description": "Absolute path to translated-content repository."
+                },
+                "liondocs.languageCode": {
+                    "type": "string",
+                    "default": "es",
+                    "description": "Work language code. It must be the same as the one in translated-content.",
+                    "enum": [
+                        "de",
+                        "es",
+                        "fr",
+                        "ja",
+                        "ko",
+                        "pl",
+                        "pt-br",
+                        "ru",
+                        "zh-cn",
+                        "zh-tw"
+                    ],
+                    "enumDescriptions": [
+                        "Deutsch",
+                        "Español",
+                        "Français",
+                        "日本",
+                        "한국인",
+                        "Polska",
+                        "Brasileiro",
+                        "Русский",
+                        "简体中文",
+                        "zh-tw"
+                    ]
+                },
+                "liondocs.showAlerts": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show alerts in successfully silent operations."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "liondocs.transfersame",
+                "title": "Transfer same file"
+            },
+            {
+                "command": "liondocs.transfersha",
+                "title": "Transfer file with sourceCommit"
+            },
+            {
+                "command": "liondocs.getshainsert",
+                "title": "Get SHA and Insert"
+            },
+            {
+                "command": "liondocs.getshatoclip",
+                "title": "Get SHA and Copy to Clipboard"
+            }
+        ],
+        "menus": {
+            "liondocscm": [
+                {
+                    "command": "liondocs.transfersame",
+                    "group": "navigation"
+                },
+                {
+                    "command": "liondocs.transfersha",
+                    "group": "navigation"
+                },
+                {
+                    "command": "liondocs.getshainsert",
+                    "group": "navigation"
+                },
+                {
+                    "command": "liondocs.getshatoclip",
+                    "group": "navigation"
+                }
+            ],
+            "editor/context": [
+                {
+                    "submenu": "liondocscm"
+                }
+            ]
+        },
+        "submenus": [
+            {
+                "id": "liondocscm",
+                "label": "LionDocs"
+            }
+        ]
+    },
+    "scripts": {},
+    "devDependencies": {
+        "@types/vscode": "^1.32.0"
+    }
+}
