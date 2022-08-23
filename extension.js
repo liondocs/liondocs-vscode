@@ -37,8 +37,16 @@ function activate(context) {
 	}));
 
 	// Activated when Get SHA and Copy to Clipboard is called
-	context.subscriptions.push(vscode.commands.registerCommand('liondocs.getshatoclip', () => {
-		vscode.window.showInformationMessage('To clipboard')
+	context.subscriptions.push(vscode.commands.registerCommand('liondocs.getshatoclip', async () => {
+		const configuredShowAlerts = vscode.workspace.getConfiguration().get('liondocs.showAlerts');
+		const task = await lionDocsFunctions.getShaToClipboard(vscode.window.activeTextEditor?.document.uri.fsPath);
+		if (task.success) {
+			if (configuredShowAlerts) {
+				vscode.window.showInformationMessage(task.message, "Copied to clipboard!");
+			}
+		} else {
+			vscode.window.showErrorMessage(task.message);
+		}
 	}));
 }
 
